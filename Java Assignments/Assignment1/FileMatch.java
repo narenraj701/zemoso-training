@@ -10,11 +10,13 @@ public class FileMatch {
         if(f.isDirectory()){
             File files[]=f.listFiles();
             for(File file:files){
-                if(file.isDirectory())
+                if(file.isDirectory()){
                     getFileNames(pattern,file);
+                     }
                 else {
-                    if (file.getName().matches(pattern))
+                    if (file.getName().matches(pattern)){
                         System.out.println("Files Absolute Path is " + file.getAbsolutePath());
+                    }
                 }
             }
         }
