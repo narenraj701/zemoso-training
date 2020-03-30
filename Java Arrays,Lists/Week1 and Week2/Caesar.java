@@ -20,19 +20,22 @@ import edu.duke.*;
 public class Caesar {
     public String encrypt(String message,int key){
         String alphabets="abcdefghijklmnopqrstuvwxyz";
-        String enc=alphabets.substring(key)+alphabets.substring(0,key);
+        String encryptedAplhabet=alphabets.substring(key)+alphabets.substring(0,key);
         String ans="";
         for(int i=0;i<message.length();i++) {
             Character c=message.charAt(i);
             if('a'<= Character.toLowerCase(c) && Character.toLowerCase(c)<='z') {
-                Character replace=enc.charAt(Character.toLowerCase(message.charAt(i))- 'a');
-                if(Character.isLowerCase(c))
+                Character replace=encryptedAplhabet.charAt(Character.toLowerCase(message.charAt(i))- 'a');
+                if(Character.isLowerCase(c)){
                     ans += replace;
-                else
+                    }
+                else{
                     ans+= Character.toUpperCase(replace);
+                    }
             }
-            else
+            else{
                 ans+=message.charAt(i);
+            }
         }
         return ans;
     }
