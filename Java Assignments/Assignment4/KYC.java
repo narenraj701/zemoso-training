@@ -1,21 +1,15 @@
 /* Given signupDate and Current Date print the allowable ranges for submission window  */
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 
 class KYC
 {
-   
-    public static void setDate(Calendar c,int date,int month,int year)
-    {
-        c.set(Calendar.DATE,date);
-        c.set(Calendar.MONTH,month);
-        c.set(Calendar.YEAR,year);
-    }
-
     public static int[] getDate(String str)
     {
         String [] s=new String[3];
@@ -24,45 +18,52 @@ class KYC
         arr[0]=Integer.parseInt(s[0]);
         arr[1]=Integer.parseInt(s[1]);
         arr[2]=Integer.parseInt(s[2]);
-        
+
         return arr;
     }
     public static void main(String args[])throws IOException
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        //SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-YYYY");
         int t = Integer.parseInt(br.readLine());
-        while(t>=0)
+        LocalDate c1;
+        LocalDate c2;
+        while(t>0)
         {
+            t--;
             String input[] = br.readLine().split(" ");
 
             int SignupDate[] = getDate(input[0]);
             int CurrentDate[] = getDate(input[1]);
+            try {
+                c1 = LocalDate.of(SignupDate[2], SignupDate[1], SignupDate[0]);
 
-            Calendar c1 = Calendar.getInstance();
-            setDate(c1, SignupDate[0], SignupDate[1]-1, SignupDate[2]);
-
-            Calendar c2 = Calendar.getInstance();
-            setDate(c2,CurrentDate[0],CurrentDate[1]-1,CurrentDate[2]);
-            
-            if(c1.getTime().after(c2.getTime()))
+                c2 = LocalDate.of(CurrentDate[2], CurrentDate[1], CurrentDate[0]);
+            }
+            catch (Exception e){
+                System.out.println("Invalid Input ");
+                continue;
+            }
+            if(c1.isAfter(c2))
             {
                 System.out.println("No ranges");
                 continue;
             }
 
-            c1.set(Calendar.YEAR, CurrentDate[2]);
-            Date currDate = c2.getTime();
+            c1 = LocalDate.of( CurrentDate[2], SignupDate[1],SignupDate[0]);
+            LocalDate currDate = c2;
 
-            c1.add(Calendar.DATE,-30);
-            System.out.print(df.format(c1.getTime()));
+            c1=c1.minusDays(30);
+            System.out.print(formatter.format(c1));
 
-            c1.add(Calendar.DATE,60);
-            if(c1.getTime().after(currDate))
-                System.out.println(" "+df.format(currDate));
+            c1=c1.plusDays(60);
+            if(c1.isAfter(currDate))
+                System.out.println(" "+formatter.format(currDate));
             else
-                System.out.println(" "+df.format(c1.getTime()));
+                System.out.println(" "+formatter.format(c1));
         }
     }
 
 }
+
