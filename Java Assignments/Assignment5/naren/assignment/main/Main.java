@@ -11,7 +11,7 @@ public class Main {
         //obj1.printLocal();
 
         singleTon obj2=new singleTon();
-        singleTon returnedObj=obj2.initialize("naren");
+        singleTon returnedObj=obj2.initialize("naren",obj2);
         returnedObj.printString();
     }
 }
