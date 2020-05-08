@@ -1,6 +1,5 @@
 package com.example.EmployeeDepartment.controller;
 
-import com.example.EmployeeDepartment.entity.Department;
 import com.example.EmployeeDepartment.entity.Employee;
 import com.example.EmployeeDepartment.services.DepartmentService;
 import com.example.EmployeeDepartment.services.EmployeeService;
@@ -22,38 +21,39 @@ public class EmployeeController {
     private EmployeeService service;
     @Autowired
     private DepartmentService departmentService;
+
     @GetMapping("")
     public String getAllEmployees(Model model) {
         List<Employee> employees = service.getEmployees();
-        model.addAttribute("emps",employees);
+        model.addAttribute("emps", employees);
         return "employees-list";
     }
-    @PostMapping("")
-    public String addEmployee(@Valid @ModelAttribute("obj") Employee employee, BindingResult result){
-        if(result.hasErrors())
+
+    @PostMapping()
+    public String addEmployee(@Valid @ModelAttribute("obj") Employee employee, BindingResult result) {
+        if (result.hasErrors())
             return "employee-form";
-        Department dep= departmentService.getDepById(departmentid).orElse(null);
-        employee.setDepartment(dep);
-        service.addEmployee(employee);
-        return "redirect:/departments/employees?id="+departmentid;
+        service.addEmployee(employee, departmentid);
+        return "redirect:/departments/" + departmentid + "/employees";
     }
 
-    @GetMapping("/employee")
-    public String updateEmployee(@RequestParam(name = "id") int id, Model model)
-    {
-        Employee emp=service.getEmployeeById(id);
-        model.addAttribute("obj",emp);
+    @GetMapping("/{id}")
+    public String updateEmployee(@PathVariable(name = "id") int id, Model model) {
+        Employee emp = service.getEmployeeById(id);
+        model.addAttribute("obj", emp);
         return "employee-form";
     }
-    @GetMapping("/delete")
-    public String deleteEmployee(@RequestParam(name = "id") int id){
+
+    @GetMapping("/delete/{id}")
+    public String deleteEmployee(@PathVariable(name = "id") int id) {
         service.deleteEmployee(id);
-        return "redirect:/departments/employees?id="+departmentid;
+        return "redirect:/departments/" + departmentid + "/employees";
     }
+
     @GetMapping("/showEmployeeForm")
-    public String showEmployeeForm(Model model){
-        Employee employee=new Employee();
-        model.addAttribute("obj",employee);
+    public String showEmployeeForm(Model model) {
+        Employee employee = new Employee();
+        model.addAttribute("obj", employee);
         return "employee-form";
     }
 }

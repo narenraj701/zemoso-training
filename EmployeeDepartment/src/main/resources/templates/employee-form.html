@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <title>Save Employee</title>
 </head>
@@ -24,11 +25,11 @@
     <form action="#" th:action="@{/employees}"
           th:object="${obj}" method="POST">
         <!-- Add hidden form field to handle update -->
-        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:field="*{id}"/>
 
         <input type="text" th:field="*{firstName}"
                class="form-control mb-4 col-4" placeholder="enter first name">
-        <p style="color:red" th:if="${#fields.hasErrors('firstName')}" th errors="*{firstName}">First Name cannot be null</p>
+        <p style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
 
         <input type="text" th:field="*{lastName}"
                class="form-control mb-4 col-4" placeholder="enter last name">

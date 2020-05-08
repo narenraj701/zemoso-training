@@ -18,30 +18,34 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
     public static int departmentid;
+
     @GetMapping("")
-    public String getDepartments(Model model){
-        List<Department> list= departmentService.getDepartments();
-        model.addAttribute("deps",list);
+    public String getDepartments(Model model) {
+        List<Department> list = departmentService.getDepartments();
+        model.addAttribute("deps", list);
         return "departments";
     }
+
     @PostMapping("")
-    public String addDepartment(@Valid @ModelAttribute("depObj") Department dep, BindingResult result){
-        if(result.hasErrors())
+    public String addDepartment(@Valid @ModelAttribute("depObj") Department dep, BindingResult result) {
+        if (result.hasErrors())
             return "Department-form";
         departmentService.addDepartment(dep);
         return "redirect:/departments";
     }
-    @GetMapping("/employees")
-    public String getEmployees(@RequestParam(name = "id") int id,Model model){
-        departmentid=id;
-        List<Employee> employeeList= departmentService.getEmployees(id);
-        model.addAttribute("emps",employeeList);
+
+    @GetMapping("/{id}/employees")
+    public String getEmployees(@PathVariable(name = "id") int id, Model model) {
+        departmentid = id;
+        List<Employee> employeeList = departmentService.getEmployees(id);
+        model.addAttribute("emps", employeeList);
         return "employees-list";
     }
+
     @GetMapping("/showDepartmentForm")
-    public String showDepartmentForm(Model model){
-        Department dep=new Department();
-        model.addAttribute("depObj",dep);
+    public String showDepartmentForm(Model model) {
+        Department dep = new Department();
+        model.addAttribute("depObj", dep);
         return "Department-form";
     }
 }

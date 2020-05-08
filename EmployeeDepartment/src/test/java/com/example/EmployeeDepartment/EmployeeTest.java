@@ -48,7 +48,7 @@ public class EmployeeTest {
         Department dep=new Department("Zemsoso");
         Employee employee=new Employee(5,"Naren","Raju",dep);
         Mockito.when(employeeRepository.save(employee)).thenReturn(employee);
-        Assert.assertEquals(employee, employeeService.addEmployee(employee));
+        Assert.assertEquals(employee, employeeService.addEmployee(employee,5));
     }
     @Test
     public void deleteEmpTest(){

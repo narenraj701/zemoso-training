@@ -37,11 +37,11 @@
 		<tbody>
 		<tr th:each="temp : ${deps}">
 
-			<td th:text="${temp.id}" />
-			<td th:text="${temp.depName}" />
+			<td th:text="${temp.id}"/>
+			<td th:text="${temp.departmentName}"/>
 			<!-- Add update button/link -->
 			<td>
-				<a th:href="@{/departments/employees(id=${temp.id})}"
+				<a th:href="@{'/departments/'+${temp.id}+'/employees'}"
 				   class="btn btn-info btn-sm">
 					Employees List
 				</a>

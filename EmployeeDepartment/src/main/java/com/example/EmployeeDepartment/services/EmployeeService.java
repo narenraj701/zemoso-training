@@ -5,9 +5,13 @@ import com.example.EmployeeDepartment.entity.Employee;
 import java.util.List;
 
 public interface EmployeeService {
-    public List<Employee> getEmployees();
-    public Employee getEmployeeById(int id);
-    public Employee addEmployee(Employee employee);
-    public Employee editEmployee(Employee employee);
-    public void deleteEmployee(int id);
+    List<Employee> getEmployees();
+
+    Employee getEmployeeById(int id);
+
+    Employee addEmployee(Employee employee,int id);
+
+    Employee editEmployee(Employee employee);
+
+    void deleteEmployee(int id);
 }

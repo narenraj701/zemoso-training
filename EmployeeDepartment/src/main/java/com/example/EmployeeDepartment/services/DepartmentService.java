@@ -7,8 +7,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DepartmentService {
-    public List<Department> getDepartments();
-    public Department addDepartment(Department department);
-    public List<Employee> getEmployees(int dep_id);
-    public Optional<Department> getDepById(int id);
+    List<Department> getDepartments();
+
+    Department addDepartment(Department department);
+
+    List<Employee> getEmployees(int dep_id);
+
+    Optional<Department> getDepById(int id);
 }

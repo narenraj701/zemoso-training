@@ -16,50 +16,51 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
     @Autowired
     private DepartmentRepository departmentRepository;
+
     @Override
     public List<Employee> getEmployees() {
         return employeeRepository.findAll();
     }
 
     @Override
-    public Employee addEmployee(Employee employee) {
-        //get department object if present
-        Department dept = departmentRepository.findById(employee.getDepartment().getId()).orElse(null);
-        //create new department if not present
-        if (null == dept) {
-            dept = new Department();
+    public Employee addEmployee(Employee employee, int id) {
+        Department department = departmentRepository.findById(id).orElse(null);
+        if (null != department) {
+            employee.setDepartment(department);
         }
-        dept.setDepName(employee.getDepartment().getDepName());
-        //set employee department
-        employee.setDepartment(dept);
         //save employee
         Employee emp = employeeRepository.save(employee);
         //get list of employees for that department
-        List<Employee> employeeList=emp.getDepartment().getEmployees();
-        if(null==employeeList){
-            employeeList=new ArrayList<>();
+        List<Employee> employeeList = emp.getDepartment().getEmployees();
+        if (null == employeeList) {
+            employeeList = new ArrayList<>();
         }
-        employeeList.add(emp);
-
+        if (!employeeList.contains(emp)) {
+            employeeList.add(emp);
+        }
         return emp;
-        }
-    public Employee getEmployeeById(int id){
+    }
+
+    public Employee getEmployeeById(int id) {
         return employeeRepository.findById(id).get();
     }
+
     @Override
     public Employee editEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
-    public void deleteEmployee(int id){
-        if(!employeeRepository.existsById(id)) {
+
+    public void deleteEmployee(int id) {
+        if (!employeeRepository.existsById(id)) {
             employeeRepository.deleteById(id);
             return;
         }
-        Employee emp=getEmployeeById(id);
-        Department dep= departmentRepository.
+        Employee emp = getEmployeeById(id);
+        Department dep = departmentRepository.
                 findById(emp.getDepartment().getId()).orElse(null);
-        if(null!=dep)
-            delete(emp,dep.getEmployees());
+        if (null != dep) {
+            delete(emp, dep.getEmployees());
+        }
         employeeRepository.deleteById(id);
     }
 

@@ -24,9 +24,9 @@
         <!-- Add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
 
-        <input type="text" th:field="*{depName}"
+        <input type="text" th:field="*{departmentName}"
                class="form-control mb-4 col-4" placeholder="enter first name">
-        <p style="color:red" th:if="${#fields.hasErrors('depName')}" th errors="*{depName}">Please Enter Department Name with minimum size of 2</p>
+        <p style="color:red" th:if="${#fields.hasErrors('departmentName')}" th:errors="*{departmentName}"></p>
 
         <button type="submit" class="btn btn-info col-2">Save</button>
 

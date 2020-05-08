@@ -1,54 +1,59 @@
 package com.example.EmployeeDepartment.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "department")
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @NotNull
-    @Size(min=2, max=30)
+    @NotEmpty(message = "Department Name cannot be empty")
     @Column(name = "dep_name")
-    private String depName;
+    private String departmentName;
     @JsonIgnore
-    @OneToMany(mappedBy = "department",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
     private List<Employee> employees;
 
     public Department(int id, String depName) {
         this.id = id;
-        this.depName = depName;
+        this.departmentName = depName;
     }
 
     public Department(String depName, List<Employee> employees) {
-        this.depName = depName;
+        this.departmentName = depName;
         this.employees = employees;
     }
 
     public Department(String depName) {
-        this.depName=depName;
+        this.departmentName = depName;
     }
+
+
     @Override
     public String toString() {
         return "Department{" +
                 "id=" + id +
-                ", depName='" + depName + '\'' +
+                ", depName='" + departmentName + '\'' +
                 ", employees=" + employees +
                 '}';
     }

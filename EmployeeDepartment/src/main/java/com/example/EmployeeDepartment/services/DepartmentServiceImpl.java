@@ -16,29 +16,24 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentRepository departmentRepository;
     @Autowired
     private EmployeeRepository employeeRepository;
+
     @Override
     public List<Department> getDepartments() {
-        return  departmentRepository.findAll();
+        return departmentRepository.findAll();
     }
 
     @Override
     public Department addDepartment(Department department) {
-        if(!departmentRepository.existsById(department.getId()))
-            return departmentRepository.save(department);
-        Department dep= departmentRepository.findById(department.getId()).orElse(null);
-        if(null==dep)
-            dep=new Department();
-        dep.setDepName(department.getDepName());
-        departmentRepository.save(dep);
-        return dep;
+        return departmentRepository.save(department);
     }
 
     @Override
     public List<Employee> getEmployees(int dep_id) {
-        List<Employee> employeeList= departmentRepository.findById(dep_id).get().getEmployees();
+        List<Employee> employeeList = departmentRepository.findById(dep_id).get().getEmployees();
         return employeeList;
     }
-    public Optional<Department> getDepById(int id){
+
+    public Optional<Department> getDepById(int id) {
         return departmentRepository.findById(id);
     }
 }
