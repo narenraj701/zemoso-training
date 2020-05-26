@@ -25,7 +25,7 @@
         <input type="hidden" th:field="*{id}" />
 
         <input type="text" th:field="*{departmentName}"
-               class="form-control mb-4 col-4" placeholder="enter first name">
+               class="form-control mb-4 col-4" placeholder="enter Department name  (*)">
         <p style="color:red" th:if="${#fields.hasErrors('departmentName')}" th:errors="*{departmentName}"></p>
 
         <button type="submit" class="btn btn-info col-2">Save</button>

@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Data
@@ -28,11 +29,12 @@ public class Employee {
     @Column(name = "id")
     private int id;
 
-    @NotEmpty(message = "First Name cannot be Empty")
+    @Pattern(regexp = "[a-zA-Z]+[ a-zA-Z]+",message = "Enter a valid first name")
     @Column(name = "first_name")
     private String firstName;
 
     @Column(name = "last_name")
+    @Pattern(regexp = "[a-zA-Z]+[ a-zA-Z]+",message = "Enter a valid last name")
     private String lastName;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})

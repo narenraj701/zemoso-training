@@ -10,36 +10,49 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-    <title>Save Employee</title>
+    <title>Employee Form</title>
 </head>
 
 <body>
 
 <div class="container">
 
-    <h3>Save Employee</h3>
+    <h3 id="demo"></h3>
     <hr>
+    <br><br>
 
-    <p class="h4 mb-4">Save Employee</p>
+    <script th:inline="javascript">
+    /*<![CDATA[*/
+    var val = /*[[${replace}]]*/ ;
+    if(val==null){
+    document.getElementById("demo").innerHTML = "Add Employee";
+    }
+    else{
+    document.getElementById("demo").innerHTML = val+" Employee";
+    }
+    /*]]>*/
+    </script>
 
-    <form action="#" th:action="@{/employees}"
-          th:object="${obj}" method="POST">
+    <form th:name="myform" th:action="@{/employees}"
+          th:object="${obj}" method="POST"  >
         <!-- Add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}"/>
 
         <input type="text" th:field="*{firstName}"
-               class="form-control mb-4 col-4" placeholder="enter first name">
+               class="form-control mb-4 col-4" placeholder="enter first name  (*)">
         <p style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
 
         <input type="text" th:field="*{lastName}"
-               class="form-control mb-4 col-4" placeholder="enter last name">
+               class="form-control mb-4 col-4" placeholder="enter last name (*)">
+        <p style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
 
         <button type="submit" class="btn btn-info col-2">Save</button>
+
 
     </form>
 
     <hr>
-    <a th:href="@{/employees}">Back to List of Employees</a>
+    <a th:href="@{/departments}">Back to List of Departments</a>
 
 </div>
 </body>

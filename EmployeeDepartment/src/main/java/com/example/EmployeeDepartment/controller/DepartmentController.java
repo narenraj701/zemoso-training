@@ -1,8 +1,11 @@
 package com.example.EmployeeDepartment.controller;
 
+import com.example.EmployeeDepartment.Exceptions.NoDepartmentExists;
 import com.example.EmployeeDepartment.entity.Department;
 import com.example.EmployeeDepartment.entity.Employee;
 import com.example.EmployeeDepartment.services.DepartmentService;
+import com.example.EmployeeDepartment.validator.DepartmentValidator;
+import com.example.EmployeeDepartment.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +21,8 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
     public static int departmentid;
+    @Autowired
+    private DepartmentValidator departmentValidator;
 
     @GetMapping("")
     public String getDepartments(Model model) {
@@ -28,9 +33,11 @@ public class DepartmentController {
 
     @PostMapping("")
     public String addDepartment(@Valid @ModelAttribute("depObj") Department dep, BindingResult result) {
+        departmentValidator.validate(dep,result);
         if (result.hasErrors())
             return "Department-form";
         departmentService.addDepartment(dep);
+
         return "redirect:/departments";
     }
 
@@ -38,6 +45,9 @@ public class DepartmentController {
     public String getEmployees(@PathVariable(name = "id") int id, Model model) {
         departmentid = id;
         List<Employee> employeeList = departmentService.getEmployees(id);
+        if(employeeList==null){
+            throw new NoDepartmentExists("No Department with ->"+id);
+        }
         model.addAttribute("emps", employeeList);
         return "employees-list";
     }

@@ -24,7 +24,12 @@
 	   class="btn btn-primary btn-sm mb-3">
 		Add A Department
 	</a>
-
+	<div th:style="'color:white;'">
+		<a th:onclick="document.forms['logoutForm'].submit()" class="btn btn-primary btn-sm mb-3">Logout</a>
+	</div>
+		<form name="logoutForm" id="logoutForm" method="POST" th:action="@{/logout}">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	</form>
 	<table class="table table-bordered table-striped">
 		<thead class="thead-dark">
 		<tr>

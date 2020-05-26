@@ -14,4 +14,6 @@ public interface DepartmentService {
     List<Employee> getEmployees(int dep_id);
 
     Optional<Department> getDepById(int id);
+
+    Department getDepartmentByName(String depName);
 }

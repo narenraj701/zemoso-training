@@ -14,4 +14,6 @@ public interface EmployeeService {
     Employee editEmployee(Employee employee);
 
     void deleteEmployee(int id);
+
+    Employee getEmployeeByLastName(String lastName);
 }

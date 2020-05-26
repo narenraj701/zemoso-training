@@ -9,7 +9,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
     <title>Employees</title>
 </head>
 
@@ -21,8 +20,8 @@
     <hr>
     <!-- Add a button -->
     <a th:href="@{/employees/showEmployeeForm}"
-       class="btn btn-primary btn-sm mb-3">
-        Add A Employee
+       class="btn btn-primary btn-sm mb-3" >
+        Add An Employee
     </a>
 
     <table class="table table-bordered table-striped">
@@ -44,7 +43,7 @@
             <!-- Add update button/link -->
             <td>
                 <a th:href="@{'/employees/'+${temp.id}}"
-                   class="btn btn-info btn-sm">
+                   class="btn btn-info btn-sm" >
                     Update
                 </a>
                 ||
@@ -61,7 +60,8 @@
 
 </div>
 <hr>
-<a href="/departments">Back To Departments</a>
+<p id="status"></p>
+<a href="/departments">Back To List of Departments</a>
 
 </body>
 </html>

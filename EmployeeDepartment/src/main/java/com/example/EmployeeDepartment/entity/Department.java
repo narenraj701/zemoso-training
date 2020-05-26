@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 
@@ -27,8 +28,8 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @NotEmpty(message = "Department Name cannot be empty")
     @Column(name = "dep_name")
+    @Pattern(regexp = "[a-zA-Z]+[ a-zA-Z]+",message = "Enter a valid Department name")
     private String departmentName;
     @JsonIgnore
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
