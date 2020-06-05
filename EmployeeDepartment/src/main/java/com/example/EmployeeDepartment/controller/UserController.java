@@ -1,7 +1,6 @@
 package com.example.EmployeeDepartment.controller;
 
 import com.example.EmployeeDepartment.entity.User;
-import com.example.EmployeeDepartment.services.SecurityService;
 import com.example.EmployeeDepartment.services.UserService;
 import com.example.EmployeeDepartment.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private SecurityService securityService;
 
     @Autowired
     private UserValidator userValidator;

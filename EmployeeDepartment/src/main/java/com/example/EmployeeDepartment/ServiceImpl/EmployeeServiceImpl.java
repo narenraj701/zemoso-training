@@ -2,13 +2,13 @@ package com.example.EmployeeDepartment.ServiceImpl;
 
 import com.example.EmployeeDepartment.DAO.DepartmentRepository;
 import com.example.EmployeeDepartment.DAO.EmployeeRepository;
+import com.example.EmployeeDepartment.Exceptions.EmployeeNotFound;
 import com.example.EmployeeDepartment.entity.Department;
 import com.example.EmployeeDepartment.entity.Employee;
 import com.example.EmployeeDepartment.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,27 +26,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee addEmployee(Employee employee, int id) {
-        Department department = departmentRepository.findById(id).orElse(null);
-        if (null != department) {
-            employee.setDepartment(department);
+        Optional<Department> department = departmentRepository.findById(id);
+        if (department.isPresent()) {
+            employee.setDepartment(department.get());
         }
-        //save employee
-        Employee emp = employeeRepository.save(employee);
-        //get list of employees for that department
-        List<Employee> employeeList = emp.getDepartment().getEmployees();
-        if (null == employeeList) {
-            employeeList = new ArrayList<>();
-        }
-        if (!employeeList.contains(emp)) {
-            employeeList.add(emp);
-        }
-        return emp;
+        return employeeRepository.save(employee);
     }
 
     public Employee getEmployeeById(int id) {
-        Optional<Employee> emp=employeeRepository.findById(id);
-        if(!emp.isPresent())
-            return null;
+        Optional<Employee> emp = employeeRepository.findById(id);
+        if (!emp.isPresent()) {
+            throw new EmployeeNotFound("No Employee Exists with id " + id);
+        }
         return emp.get();
     }
 
@@ -56,25 +47,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public void deleteEmployee(int id) {
-        if (!employeeRepository.existsById(id)) {
-            employeeRepository.deleteById(id);
-            return;
-        }
-        Employee emp = getEmployeeById(id);
-        Department dep = departmentRepository.
-                findById(emp.getDepartment().getId()).orElse(null);
-        if (null != dep) {
-            delete(emp, dep.getEmployees());
-        }
         employeeRepository.deleteById(id);
     }
-
     @Override
-    public Employee getEmployeeByLastName(String lastName) {
-        return employeeRepository.findByLastName(lastName);
+    public Optional<Employee> getEmployeeByEmailId(String emailId) {
+        return employeeRepository.findByEmailId(emailId);
     }
 
-    private void delete(Employee emp, List<Employee> employees) {
-        employees.remove(emp);
-    }
 }

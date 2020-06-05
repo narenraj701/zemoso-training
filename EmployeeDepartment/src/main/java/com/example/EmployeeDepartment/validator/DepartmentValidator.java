@@ -8,9 +8,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 @Component
 public class DepartmentValidator implements Validator {
     @Autowired
@@ -24,9 +21,9 @@ public class DepartmentValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Department department = (Department) o;
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "departmentName", "NotEmpty");
-        if (departmentService.getDepartmentByName(department.getDepartmentName())!=null) {
-            errors.rejectValue("departmentName", "duplicate.departmentName");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty");
+        if (departmentService.getDepartmentByName(department.getName()).isPresent()) {
+            errors.rejectValue("name", "duplicate.departmentName");
         }
 
     }

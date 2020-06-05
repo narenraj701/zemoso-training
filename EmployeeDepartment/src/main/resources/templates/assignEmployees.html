@@ -1,0 +1,62 @@
+
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>Employees</title>
+</head>
+
+<body >
+
+<div class="container">
+
+    <h3>Employees With No Departments</h3>
+    <hr>
+
+    <h1 id="demo"></h1>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Employee-id</th>
+            <th>First-Name</th>
+            <th>Last-Name</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="temp : ${noDepEmps}">
+
+            <td th:text="${temp.id}" />
+            <td th:text="${temp.firstName}" />
+            <td th:text="${temp.lastName}" />
+            <td><form th:action="@{/departments/addEmp}">
+                <input type="hidden" name="EMPID" th:value="${temp.id}"/>
+                <select id="ID" name="ID">
+                    <option th:each="val : ${depnames}" th:value="${val.id}" th:text="${val.departmentName}">
+                </select>
+                <input type="submit" value="Assign Department">
+            </form>
+
+        </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<hr>
+<p id="status"></p>
+<a href="/departments">Back To List of Departments</a>
+
+</body>
+</html>
+
+
+

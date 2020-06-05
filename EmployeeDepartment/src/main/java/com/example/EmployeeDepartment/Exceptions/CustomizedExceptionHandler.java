@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class CustomizedExceptionHandler {
 
-        @ExceptionHandler
-        String handleException(NoDepartmentExists exc, Model model){
-            ErrorDetails error = new ErrorDetails();
-            model.addAttribute("message",exc.getMessage());
-            return "errorHandler";
-        }
     @ExceptionHandler
-    ResponseEntity<ErrorDetails> handleException(NoEmployeeExists exc){
+    String handleException(DepartmentNotFound exc, Model model) {
+        ErrorDetails error = new ErrorDetails();
+        model.addAttribute("message", exc.getMessage());
+        return "errorHandler";
+    }
+
+    @ExceptionHandler
+    ResponseEntity<ErrorDetails> handleException(EmployeeNotFound exc) {
         ErrorDetails error = new ErrorDetails();
 
         error.setMessage(exc.getMessage());
@@ -24,4 +25,4 @@ public class CustomizedExceptionHandler {
 
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
-    }
+}

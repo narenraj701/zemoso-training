@@ -13,7 +13,7 @@ public interface DepartmentService {
 
     List<Employee> getEmployees(int dep_id);
 
-    Optional<Department> getDepById(int id);
+    Optional<Department> getDepartmentById(int id);
 
-    Department getDepartmentByName(String depName);
+    Optional<Department> getDepartmentByName(String depName);
 }

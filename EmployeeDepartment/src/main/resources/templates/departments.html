@@ -1,6 +1,6 @@
 
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
 	<!-- Required meta tags -->
@@ -20,9 +20,15 @@
 	<h3>Departments</h3>
 	<hr>
 	<!-- Add a button -->
+	<div th:style="'margin:10px auto'" sec:authorize="hasAuthority('ADMIN')">
 	<a th:href="@{/departments/showDepartmentForm}"
 	   class="btn btn-primary btn-sm mb-3">
 		Add A Department
+	</a>
+	</div>
+	<a th:href="@{/profile}"
+	   class="btn btn-primary btn-sm mb-3">
+		Profile
 	</a>
 	<div th:style="'color:white;'">
 		<a th:onclick="document.forms['logoutForm'].submit()" class="btn btn-primary btn-sm mb-3">Logout</a>
@@ -43,7 +49,7 @@
 		<tr th:each="temp : ${deps}">
 
 			<td th:text="${temp.id}"/>
-			<td th:text="${temp.departmentName}"/>
+			<td th:text="${temp.name}"/>
 			<!-- Add update button/link -->
 			<td>
 				<a th:href="@{'/departments/'+${temp.id}+'/employees'}"
@@ -55,8 +61,12 @@
 		</tr>
 		</tbody>
 	</table>
-
+	<a th:href="@{'/departments/employees'}"
+	   class="btn btn-info btn-sm">
+		Employees With No Department Assigned
+	</a>
 </div>
+
 
 </body>
 </html>

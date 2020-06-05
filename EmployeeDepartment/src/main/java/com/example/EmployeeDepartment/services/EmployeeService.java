@@ -3,6 +3,7 @@ package com.example.EmployeeDepartment.services;
 import com.example.EmployeeDepartment.entity.Employee;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface EmployeeService {
     List<Employee> getEmployees();
@@ -15,5 +16,5 @@ public interface EmployeeService {
 
     void deleteEmployee(int id);
 
-    Employee getEmployeeByLastName(String lastName);
+    Optional<Employee> getEmployeeByEmailId(String emailId);
 }

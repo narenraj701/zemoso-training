@@ -1,6 +1,5 @@
 package com.example.EmployeeDepartment.Exceptions;
 
-import java.util.Date;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

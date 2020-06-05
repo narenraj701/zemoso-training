@@ -22,10 +22,10 @@
     <br><br>
 
     <script th:inline="javascript">
-    document.getElementById("demo").innerHTML = "Add Employee";
+     document.getElementById("demo").innerHTML = "Update Employee";
     </script>
 
-    <form th:name="myform" th:action="@{'/employees/'+${depId}}"
+    <form th:name="myform" th:action="@{'/employees'+'/update/'+${depId}}"
           th:object="${obj}" method="POST"  >
         <!-- Add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}"/>
@@ -43,15 +43,15 @@
         <p style="color:red" th:if="${#fields.hasErrors('mobileNumber')}" th:errors="*{mobileNumber}"></p>
         Email Id(*):
         <input type="text" th:field="*{emailId}"
-               class="form-control mb-4 col-4" placeholder="enter email Id name ">
+               class="form-control mb-4 col-4" placeholder="enter email Id name " readonly>
         <p style="color:red" th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}"></p>
         Date Of Birth(*):
         <input type="date" th:field="*{dateOfBirth}"
-               class="form-control mb-4 col-4" placeholder="enter date of Birth ">
+               class="form-control mb-4 col-4" placeholder="enter date of Birth " readonly>
         <p style="color:red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></p>
         Date Of Joining(*):
         <input type="date" th:field="*{dateOfJoining}"
-               class="form-control mb-4 col-4" placeholder="enter Joining date ">
+               class="form-control mb-4 col-4" placeholder="enter Joining date " readonly>
         <p style="color:red" th:if="${#fields.hasErrors('dateOfJoining')}" th:errors="*{dateOfJoining}"></p>
 
         Experience:

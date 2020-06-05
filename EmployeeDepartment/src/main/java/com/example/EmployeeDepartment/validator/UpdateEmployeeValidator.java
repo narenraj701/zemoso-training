@@ -11,10 +11,8 @@ import org.springframework.validation.Validator;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 @Component
-public class EmployeeValidator implements Validator {
-
+public class UpdateEmployeeValidator implements Validator {
     @Autowired
     EmployeeService employeeService;
     @Override
@@ -26,9 +24,6 @@ public class EmployeeValidator implements Validator {
     public void validate(Object o, Errors errors) {
         Employee employee = (Employee) o;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailId", "NotEmpty");
-        if (employeeService.getEmployeeByEmailId(employee.getEmailId()).isPresent()) {
-            errors.rejectValue("emailId", "duplicate.emailId");
-        }
         String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher=pattern.matcher(employee.getEmailId());

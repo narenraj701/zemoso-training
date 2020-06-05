@@ -2,8 +2,10 @@ package com.example.EmployeeDepartment.services;
 
 import com.example.EmployeeDepartment.entity.User;
 
+import java.util.Optional;
+
 public interface UserService {
     void save(User user);
 
-    User findByUsername(String username);
+    Optional<User> findByUsername(String username);
 }

@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Profile</title>
+</head>
+<body>
+<div sec:authorize="isAuthenticated()">
+    <h1>Profile</h1>
+    <hr>
+    &nbsp;&nbsp;&nbsp;Welcome <b><span sec:authentication="name">Username</span></b><br>
+
+    &nbsp;&nbsp;&nbsp;Your Roles are : <i><span sec:authentication="principal.authorities">Roles</span></i><br>
+    &nbsp;&nbsp;&nbsp;AccountNotExpired :<span sec:authentication="principal.AccountNonExpired"></span><br>
+    &nbsp;&nbsp;&nbsp;Mobile Number : <span th:text="${mobile}"></span>
+    <hr>
+    <br><br>
+</div>
+<a href="/departments">Back To List of Departments</a>
+</body>
+</html>
