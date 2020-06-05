@@ -1,0 +1,75 @@
+
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Departments</title>
+</head>
+
+<body>
+
+<div class="container">
+
+	<h3>Departments</h3>
+	<hr>
+	<!-- Add a button -->
+	<div th:style="'margin:10px auto'" sec:authorize="hasAuthority('ADMIN')">
+	<a th:href="@{/departments/showDepartmentForm}"
+	   class="btn btn-primary btn-sm mb-3">
+		Add A Department
+	</a>
+	</div>
+	<a th:href="@{/profile}"
+	   class="btn btn-primary btn-sm mb-3">
+		Profile
+	</a>
+	<div th:style="'color:white;'">
+		<a th:onclick="document.forms['logoutForm'].submit()" class="btn btn-primary btn-sm mb-3">Logout</a>
+	</div>
+		<form name="logoutForm" id="logoutForm" method="POST" th:action="@{/logout}">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	</form>
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+		<tr>
+			<th>Department-id</th>
+			<th>Department-Name</th>
+			<th>Employees</th>
+		</tr>
+		</thead>
+
+		<tbody>
+		<tr th:each="temp : ${deps}">
+
+			<td th:text="${temp.id}"/>
+			<td th:text="${temp.name}"/>
+			<!-- Add update button/link -->
+			<td>
+				<a th:href="@{'/departments/'+${temp.id}+'/employees'}"
+				   class="btn btn-info btn-sm">
+					Employees List
+				</a>
+			</td>
+
+		</tr>
+		</tbody>
+	</table>
+	<a th:href="@{'/departments/employees'}"
+	   class="btn btn-info btn-sm">
+		Employees With No Department Assigned
+	</a>
+</div>
+
+
+</body>
+</html>
+
+
+

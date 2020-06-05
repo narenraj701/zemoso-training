@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Employee Form</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3 id="demo"></h3>
+    <hr>
+    <br><br>
+
+    <script th:inline="javascript">
+     document.getElementById("demo").innerHTML = "Update Employee";
+    </script>
+
+    <form th:name="myform" th:action="@{'/employees'+'/update/'+${depId}}"
+          th:object="${obj}" method="POST"  >
+        <!-- Add hidden form field to handle update -->
+        <input type="hidden" th:field="*{id}"/>
+        First Name(*):
+        <input type="text" th:field="*{firstName}"
+               class="form-control mb-4 col-4" placeholder="enter first name">
+        <p style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+        Last Name(*):
+        <input type="text" th:field="*{lastName}"
+               class="form-control mb-4 col-4" placeholder="enter last name ">
+        <p style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+        Mobile Number(*):
+        <input type="text" th:field="*{mobileNumber}"
+               class="form-control mb-4 col-4" placeholder="enter mobile name ">
+        <p style="color:red" th:if="${#fields.hasErrors('mobileNumber')}" th:errors="*{mobileNumber}"></p>
+        Email Id(*):
+        <input type="text" th:field="*{emailId}"
+               class="form-control mb-4 col-4" placeholder="enter email Id name " readonly>
+        <p style="color:red" th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}"></p>
+        Date Of Birth(*):
+        <input type="date" th:field="*{dateOfBirth}"
+               class="form-control mb-4 col-4" placeholder="enter date of Birth " readonly>
+        <p style="color:red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></p>
+        Date Of Joining(*):
+        <input type="date" th:field="*{dateOfJoining}"
+               class="form-control mb-4 col-4" placeholder="enter Joining date " readonly>
+        <p style="color:red" th:if="${#fields.hasErrors('dateOfJoining')}" th:errors="*{dateOfJoining}"></p>
+
+        Experience:
+        <input type="text" th:field="*{experience}"
+               class="form-control mb-4 col-4" placeholder="Write your experience">
+        <p style="color:red" th:if="${#fields.hasErrors('experience')}" th:errors="*{experience}"></p>
+
+
+        Profile Picture:
+        <input type="file" th:field="*{pic}"
+               class="form-control mb-4 col-4" placeholder="Upload Profile picture ">
+        <p style="color:red" th:if="${#fields.hasErrors('pic')}" th:errors="*{pic}"></p>
+
+        Resume:
+        <input type="file" th:field="*{resume}"
+               class="form-control mb-4 col-4" placeholder="Upload resume ">
+        <p style="color:red" th:if="${#fields.hasErrors('resume')}" th:errors="*{resume}"></p>
+
+        <button type="submit" class="btn btn-info col-2">Save</button>
+
+
+    </form>
+
+    <hr>
+    <a th:href="@{/departments}">Back to List of Departments</a>
+
+</div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+

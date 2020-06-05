@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Save Department</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Save Department</h3>
+    <hr>
+    <br>
+
+    <form action="#" th:action="@{/departments}"
+          th:object="${depObj}" method="POST">
+        <!-- Add hidden form field to handle update -->
+        <input type="hidden" th:field="*{id}" />
+        Department Name(*):
+        <input type="text" th:field="*{name}"
+               class="form-control mb-4 col-4" placeholder="enter Department name">
+        <p style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+
+        <button type="submit" class="btn btn-info col-2">Save</button>
+
+    </form>
+
+    <hr>
+    <a th:href="@{/departments}">Back to List of Departments</a>
+
+</div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
