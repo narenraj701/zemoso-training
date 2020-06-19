@@ -12,7 +12,7 @@
     <div class="grid-container">
         <div id="tables">
             <h2 >Tables</h2>
-            <input type="text" id="tablesearch" class="tablesearch" onkeyup="tablesearch()">
+            <input type="text" id="tablesearch" placeholder="Search by Table Id...." class="tablesearch" onkeyup="tablesearch()">
             <div class="tableitem" id="table1" ondragover="allowDrop(event)" ondrop="drop(event,this)">Table-1<br>
                 <p id="nitemst1">Items:  </p><p id="totalt1">Total:   </p>
                 <table class="table-content" id="t1" style="display: none;">
@@ -66,7 +66,7 @@
         </div>    
             <div id="items">
                 <h2>Menu</h2>
-                <input type="text" id="tosearch" class="searchbox" onkeyup="search()">
+                <input type="text" id="tosearch" placeholder="Search by ItemName,Menu...." class="searchbox" onkeyup="search()">
                 <div id="entree">
                     <h4 class="item" id="s0" draggable="true" ondragstart="drag(event)">Spring Rolls Rs-200</h4>
                     <h4 class="item" id="s1" draggable="true" ondragstart="drag(event)">French Onion Soup Rs-200</h4>
