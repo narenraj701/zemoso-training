@@ -1,0 +1,24 @@
+1. Find out the PG-13 rated comedy movies. DO NOT use the film_list table.
+2. Find out the top 3 rented horror movies.
+3. Find out the list of customers from India who have rented sports movies.
+4. Find out the list of customers from Canada who have rented “NICK WAHLBERG” movies.
+5. Find out the number of movies in which “SEAN WILLIAMS” acted.
+
+Solutions:-
+
+1. select title from film,film_category,category where rating='PG-13' and film.film_id=film_category.film_id and film_category.category_id=category.category_id and category.name="COMEDY";
+
+
+
+
+
+2.select title from film_list,rental,inventory where rental.inventory_id=inventory.inventory_id and inventory.film_id=film_list.FID and film_list.category='HORROR' group by title order by count(*) desc limit 3 ;
+
+
+3. select customer_list.ID as ID,name,country from customer_list,rental,inventory,film_list where rental.inventory_id=inventory.inventory_id and inventory.film_id=film_list.FID and film_list.category='Sports' and customer_list.country='India' group by customer_list.ID;
+	
+
+4.select customer_list.ID as ID,name from customer_list,rental,inventory,film_list,film_actor,actor where rental.inventory_id=inventory.inventory_id and inventory.film_id=film_list.FID and film_list.FID=film_actor.film_id and film_actor.actor_id=actor.actor_id and actor.first_name='NICK' and actor.last_name='WAHLBERG' and  customer_list.country='Canada' group by ID;
+
+5.select count(*) as Total_No_Of_Movies from film_list,film_actor,actor where film_list.FID=film_actor.film_id and film_actor.actor_id=actor.actor_id and actor.first_name='SEAN' and actor.last_name='WILLIAMS';
+
