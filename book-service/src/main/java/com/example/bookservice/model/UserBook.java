@@ -1,5 +1,7 @@
 package com.example.bookservice.model;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -7,9 +9,10 @@ import java.util.UUID;
 
 enum STATUS
 {
-    START_READING, READ, WANT_TO_READ;
+    START_READING,CURRENTLY_READING, WANT_TO_READ , READ ;
 }
 @Entity
+@Data
 @Table(name = "user_book_Details")
 public class UserBook {
     @Id

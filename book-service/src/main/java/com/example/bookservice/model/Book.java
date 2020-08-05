@@ -22,7 +22,11 @@ import java.util.UUID;
 public class Book {
     @Id
     private UUID id;
+    private String ISBN;
     private String title;
+    @ManyToOne(cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name="category_id")
+    private Category categoryId;
     @Lob
     private String image;
     private Date releaseDate;
