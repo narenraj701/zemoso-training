@@ -2,6 +2,7 @@ package com.example.bookservice.model;
 
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -17,9 +18,13 @@ enum STATUS
 public class UserBook {
     @Id
     private UUID id;
+    @Column(nullable = false)
     private UUID userId;
+    @Column(nullable = false)
     private UUID bookId;
+    @Column(nullable = false)
     private STATUS status;
     private int noOfPagesRead;
+    @Column(nullable = false)
     private boolean bookmarked;
 }

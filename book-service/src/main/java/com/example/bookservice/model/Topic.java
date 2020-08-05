@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -22,6 +23,7 @@ public class Topic {
     private UUID id;
     @OneToMany(cascade = CascadeType.ALL,targetEntity = Category.class)
     private List<Category> categories;
+    @Column(nullable = false)
     private String name;
 }
 

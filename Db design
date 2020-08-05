@@ -1,0 +1,142 @@
+User
+=====
+
+user table
+==========
+id - uuid
+firstName - String(50)
+lastName - String(50)
+profilePic - Text
+designation - Enum or designation table id
+role_id - role table id
+
+
+Enum or separate table
+designation -> student, professor
+
+
+role table
+==========
+id 
+name
+
+
+user_followers
+===============
+id
+userId
+followerId
+
+================================================================
+Book
+====
+
+/books
+/books/<bookid>
+/topics
+/user-stats
+
+
+book--->author
+(Many--->one)
+
+book--->Category
+(Many--->one)
+
+topic-->categories
+(one-->many)
+
+
+
+
+
+
+
+
+book table
+===========
+id - uuid
+isbn-String
+title -String
+category_id - id of category table
+image - Text
+releaseDate - Date
+language - String
+totalPages - int
+description - String
+authorId - id of author table
+
+
+Category table
+===============
+id-UUID
+name
+topicId-UUID
+
+
+
+author table
+=============
+id
+first_name
+last_name
+profilePic
+description
+
+
+author_followers table
+=======================
+id
+authorId
+userId
+
+
+user_book table
+=================
+id
+userId
+bookId
+status - Enum would be preferred. ----->
+noOfPagesRead
+bookmarked
+
+select count(*) from user_book where status="Continue Reading" 
+
+topic table
+===========
+id
+name
+
+
+topic_categories table
+======================
+id
+topicId
+categoryId
+
+
+=============================================================================
+
+Review
+==========
+
+
+Review table
+=============
+id
+bookId
+postedBy  => user id from user table
+reviewDescription - Text
+postedAt => date 
+rating
+
+
+
+book, user, review => separate schema
+search will be in public schema
+
+
+Shanmukha -> User and Validation auth token in services
+Avinash -> Review 
+Rehman -> search
+Naren -> Book

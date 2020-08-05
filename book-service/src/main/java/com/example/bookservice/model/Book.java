@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -22,16 +23,22 @@ import java.util.UUID;
 public class Book {
     @Id
     private UUID id;
+    @Column(nullable = false)
     private String ISBN;
+    @Column(nullable = false)
     private String title;
     @ManyToOne(cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name="category_id")
     private Category categoryId;
     @Lob
     private String image;
+    @Column(nullable = false)
     private Date releaseDate;
+    @Column(nullable = false)
     private String language;
+    @Column(nullable = false)
     private Integer totalPages;
+    @Column(nullable = false)
     private String description;
     @ManyToOne(cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name="author_id")

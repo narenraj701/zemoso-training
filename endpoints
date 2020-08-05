@@ -1,0 +1,33 @@
+{   
+    Get all books 		--> "/books"
+    Get a book by Id		-->"/books/<bookId>"
+    Get ratings of book 	-->"/books/<bookId>/ratings"
+    Get no of ratings submitted	-->"/books/<bookId>/total-ratings-submitted"
+    reviws from followers	--> "/books/<bookId>/reviews?user-type=followers"
+    reviws from non-followers   -->"/books/<bookId>/reviews?user-type=non-followers"
+    user following topics	-->"/topics"
+    Get top rated books 	-->"/books/top-rated"
+}
+
+
+
+
+topics
+===========
+INSERT INTO topics VALUES('a71d2ba2-d704-11ea-87d0-0242ac130003','Mathematics');
+
+
+categories
+=============
+insert into categories VALUES('e92a057e-d704-11ea-87d0-0242ac130003','Algebra','a71d2ba2-d704-11ea-87d0-0242ac130003');
+insert into categories VALUES('e92a057e-d704-11ea-87d0-0242ac130004','Calculus','a71d2ba2-d704-11ea-87d0-0242ac130003');
+
+
+authors
+===========
+insert into authors VALUES('fc960cec-d705-11ea-87d0-0242ac130003','description of author','Joe Pearson',null,'https://www.google.com/search?q=joe+pearson&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiIzbaG7YPrAhW58HMBHR6NDzoQ_AUoAnoECBoQBA&biw=1299&bih=669#imgrc=4h9UJ5JMIrwHyM');
+
+
+books
+=======
+insert into books VALUES('a312e37e-d706-11ea-87d0-0242ac130003','9781234567897',
